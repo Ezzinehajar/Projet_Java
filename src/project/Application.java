@@ -1,10 +1,15 @@
 package project;
 
+import java.util.List;
 import java.util.Scanner;
 
+import entite.ClassementParGenre;
+import entite.Participant;
+import service.ClassementService;
 public class Application {
 	private static final String STOP = "STOP";
 	private static final Scanner scanner = new Scanner(System.in);
+	private static ConnexionSqlite connec = new ConnexionSqlite();
 
 	public static void main(String[] args) {
 
@@ -13,21 +18,14 @@ public class Application {
 
 		do {
 
-			System.out.println("Taper 1 pour afficher le classement par epreuve");
+			System.out.println("Taper 1 pour afficher le classement par Genre");
 			System.out.println("Taper STOP si vous voulez quitter l'application ");
-			/*
-			 * System.out.println("Tapez 2 pour ....."); System.out.println("Tapez 3");
-			 */
-			// System.out.println(scanner.nextLine());
+
 			input = scanner.nextLine();
 			switch (input) {
 			case "1":
-				System.out.println("classement par epreuve");
-				break;
-
-			case "2":
-				break;
-			case "3":
+				System.out.println("classement par Genre");
+				gestionDeClassement();
 				break;
 			}
 
@@ -37,4 +35,11 @@ public class Application {
 
 	}
 
+	private static void gestionDeClassement() {
+		ClassementService service =new ClassementService();
+		List<Participant> participants =connec.retrieveParticipant();
+		ClassementParGenre classement =service.calculClassementParGenre(participants);
+		System.out.println(classement.toString());
+		
+	}
 }

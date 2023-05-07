@@ -10,12 +10,26 @@ public class Participant {
 	private String prenom;
 	private GenreEnum genre;
 	private Map<Epreuve, Chrono> chronoParEpreuve = new HashMap<>();
+	private Bolair bolair;
+	private int id;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Participant(String nom, String prenom, GenreEnum genre) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.genre = genre;
+	}
+
+	public Participant() {
+		super();
 	}
 
 	public Participant(String nom, String prenom, GenreEnum genre, Map<Epreuve, Chrono> chronoParEpreuve) {
@@ -61,10 +75,10 @@ public class Participant {
 	public Duration getTempsTotal() {
 		Duration d = Duration.ZERO;
 		for (Chrono c : chronoParEpreuve.values()) {
-			d.plus(c.getTempsTotal());
+			d=d.plus(c.getTempsTotal());
 		}
-
 		return d;
 
 	}
-}
+
+	}

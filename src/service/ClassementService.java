@@ -2,9 +2,12 @@ package service;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
 
 import entite.ClassementParCircuit;
 import entite.ClassementParGenre;
@@ -24,18 +27,18 @@ public class ClassementService {
 				listHommes.add(p);
 			}
 		}
+
 		triList(listFemmes);
 		triList(listHommes);
 
 		Map<GenreEnum, List<Participant>> participantParGenre = new HashMap<>();
 		participantParGenre.put(GenreEnum.FEMME, listFemmes);
 		participantParGenre.put(GenreEnum.HOMME, listHommes);
-		
+
 		return new ClassementParGenre(participantParGenre);
 
-
 	}
-
+// du moins rapide au plus rapide 
 	private void triList(List<Participant> participants) {
 		int taille = participants.size();
 		Participant tmp;
@@ -51,12 +54,9 @@ public class ClassementService {
 
 			}
 		}
-
+	
 	}
 
-	public ClassementParCircuit calculClassementParCircuit() {
-
-		return null;
-	}
-
+	
+	
 }
